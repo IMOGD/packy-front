@@ -48,7 +48,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <layer id="5" name="main" width="20" height="20">
+ <layer id="5" name="mainScene" width="20" height="20">
   <properties>
    <property name="map" value="main_map"/>
   </properties>

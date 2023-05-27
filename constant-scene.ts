@@ -1,5 +1,5 @@
 const SCENE_LIST = {
-  MAIN: "main",
+	MAIN: 'mainScene',
 };
 
 export default SCENE_LIST;

@@ -1,6 +1,6 @@
 @startuml
 gameBase <|-- game
-keyBoardManager *-- EventContainerInterface
+'keyBoardManager *-- EventContainerInterface
 
 class gameBase <EventTarget> {
     _parentContainer : string;
@@ -24,18 +24,18 @@ class game {
     gameStart():void;
 }
 
-class EventContainerInterface {
- LEFT: boolean;
-  RIGHT: boolean;
-  UP: boolean;
-  DOWN: boolean;
-}
+'interface EventContainerInterface {
+' LEFT: boolean;
+'  RIGHT: boolean;
+'  UP: boolean;
+'  DOWN: boolean;
+'}
 
-class keyBoardManager {
-    target: Phaser.GameObjects.Container | undefined;
-    moveSpeed: number;
-    keyboardEventContainer:
-}
+'class keyBoardManager {
+'    target: Phaser.GameObjects.Container | undefined;
+'    moveSpeed: number;
+'    keyboardEventContainer:
+'}
 
 class main <Phaser.Scene> {
     // main scene;

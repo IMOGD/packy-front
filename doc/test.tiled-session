@@ -1,0 +1,26 @@
+{
+    "activeFile": "test.tmx",
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "test.tmx": {
+            "scale": 2.58,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 135.27131782945736,
+                "y": 138.953488372093
+            }
+        },
+        "test.tmx#test-tiled-set": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+        "test.tmx"
+    ],
+    "recentFiles": [
+        "test.tmx"
+    ]
+}

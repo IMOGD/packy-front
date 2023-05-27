@@ -1,0 +1,32 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        }
+    },
+    "last.imagePath": "/Users/bomyong/WorkSpace/pack-man/doc",
+    "map.height": 9,
+    "map.lastUsedFormat": "tmx",
+    "map.renderOrder": null,
+    "map.tileHeight": 30,
+    "map.tileWidth": 30,
+    "map.width": 9,
+    "openFiles": [
+    ],
+    "project": "test.tiled-project",
+    "recentFiles": [
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 30,
+        "width": 30
+    }
+}

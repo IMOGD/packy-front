@@ -1,0 +1,48 @@
+@startuml
+gameBase <|-- game
+keyBoardManager *-- EventContainerInterface
+
+class gameBase <EventTarget> {
+    _parentContainer : string;
+    store : Store<any>;
+    create(): void;
+    update(): void;
+    resize(): void;
+    destroy(): void;
+}
+
+class game {
+    game : Phaser.Game | undefined;
+    contentContainer : Phaser.GameObjects.Container;
+    requestAnimationId : number;
+
+    preload(): void;
+    getScene(): Phaser.Scene;
+    gamePreload(): void;
+    gameCreate():void;
+    gameUpdate():void;
+    gameStart():void;
+}
+
+class EventContainerInterface {
+ LEFT: boolean;
+  RIGHT: boolean;
+  UP: boolean;
+  DOWN: boolean;
+}
+
+class keyBoardManager {
+    target: Phaser.GameObjects.Container | undefined;
+    moveSpeed: number;
+    keyboardEventContainer:
+}
+
+class main <Phaser.Scene> {
+    // main scene;
+}
+
+
+
+
+
+@enduml

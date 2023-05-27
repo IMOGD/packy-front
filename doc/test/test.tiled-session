@@ -1,0 +1,43 @@
+{
+    "activeFile": "/Users/bomyong/WorkSpace/pack-man/public/assets/resource/test/test.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/bomyong/WorkSpace/pack-man/public/assets/resource/test/test.tmx": {
+            "scale": 2.58,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 135.27131782945736,
+                "y": 135.07751937984494
+            }
+        },
+        "/Users/bomyong/WorkSpace/pack-man/public/assets/resource/test/test.tmx#test-tiled-set": {
+            "scaleInDock": 1
+        },
+        "test.tmx": {
+            "scale": 2.5861111111111112,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 135.33834586466165,
+                "y": 135.1450053705693
+            }
+        },
+        "test.tmx#test-tiled-set": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "/Users/bomyong/WorkSpace/pack-man/public/assets/resource/test",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "openFiles": [
+        "/Users/bomyong/WorkSpace/pack-man/public/assets/resource/test/test.tmx"
+    ],
+    "project": "",
+    "recentFiles": [
+        "/Users/bomyong/WorkSpace/pack-man/public/assets/resource/test/test.tmx",
+        "test.tmx"
+    ]
+}

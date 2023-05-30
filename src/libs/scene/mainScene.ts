@@ -43,8 +43,17 @@ class mainScene extends Phaser.Scene {
 			faceColor: new Phaser.Display.Color(243, 234, 48, 255),
 		});
 
+		const spawnPoint = [
+			{ x: 45, y: 45 },
+			{ x: 555, y: 45 },
+			{ x: 525, y: 555 },
+			{ x: 45, y: 555 },
+			{ x: 30 * 11 + 15, y: 30 * 10 + 15 },
+		];
+		const randomNum = Math.floor(Math.random() * 5);
+
 		// 캐릭터 생성
-		this.Packy = this.add.Packy(45, 45, 'Packy');
+		this.Packy = this.add.Packy(spawnPoint[randomNum].x, spawnPoint[randomNum].y, 'Packy');
 
 		this.physics.add.collider(this.Packy, wallLayer as TilemapLayer);
 	}

@@ -20,9 +20,9 @@ export class Game extends GameBase {
 	create(): void {
 		this.game = new Phaser.Game({
 			type: Phaser.AUTO,
-			width: 640,
-			height: 640,
-			// backgroundColor: "#003bd5",
+			width: 600,
+			height: 600,
+			backgroundColor: '#003bd5',
 			physics: {
 				default: 'arcade',
 				arcade: {

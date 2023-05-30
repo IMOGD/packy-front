@@ -19,8 +19,8 @@ class mainScene extends Phaser.Scene {
 	preload(): void {
 		if (CONSTANT.DEBUG) console.log(`preload`);
 		this.load.image('Packy', './assets/images/Packy_1.png');
-		this.load.image('test_tile', './assets/resource/test/test-tiled-set.png');
-		this.load.tilemapTiledJSON('test_json', './assets/resource/test/test.json');
+		this.load.image('test_tile', './assets/resource/map/map-tiled-set.png');
+		this.load.tilemapTiledJSON('test_json', './assets/resource/map/map-tiled-set.json');
 		this.cursor = this.input.keyboard?.createCursorKeys();
 	}
 
@@ -36,15 +36,15 @@ class mainScene extends Phaser.Scene {
 
 		wallLayer?.setCollisionByProperty({ collision: true });
 
-		const debugGraphics = this.add.graphics().setAlpha(0.7);
+		const debugGraphics = this.add.graphics().setAlpha();
 		wallLayer?.renderDebug(debugGraphics, {
 			tileColor: null,
-			collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
+			collidingTileColor: new Phaser.Display.Color(0, 0, 0, 255),
 			faceColor: new Phaser.Display.Color(243, 234, 48, 255),
 		});
 
 		// 캐릭터 생성
-		this.Packy = this.add.Packy(100, 80, 'Packy');
+		this.Packy = this.add.Packy(45, 45, 'Packy');
 
 		this.physics.add.collider(this.Packy, wallLayer as TilemapLayer);
 	}

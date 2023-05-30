@@ -12,16 +12,18 @@
             "scaleInDock": 1
         }
     },
-    "last.imagePath": "/Users/bomyong/WorkSpace/pack-man/doc",
-    "map.height": 9,
+    "last.exportedFilePath": "/Users/bomyong/WorkSpace/Packy/public/assets/resource/map",
+    "last.imagePath": "/Users/bomyong/WorkSpace/Packy/public/assets/resource/map",
+    "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
     "map.renderOrder": null,
     "map.tileHeight": 30,
     "map.tileWidth": 30,
-    "map.width": 9,
+    "map.width": 20,
     "openFiles": [
     ],
-    "project": "test.tiled-project",
+    "project": "map.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
     ],
     "tileset.embedInMap": true,

@@ -27,6 +27,7 @@ export class Game extends GameBase {
 				default: 'arcade',
 				arcade: {
 					gravity: { y: 0 },
+					debug: true,
 				},
 			},
 			parent: this.getParentContainer(),

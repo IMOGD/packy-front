@@ -87,6 +87,9 @@ export default class Packy extends Phaser.Physics.Arcade.Sprite {
 		else if (cursors.down.isDown) {
 			this.setVelocity(0, this._moveSpeed);
 		}
+		// else {
+		// 	this.setVelocity(0, 0);
+		// }
 	}
 }
 
@@ -102,13 +105,13 @@ export function initPacky() {
 			frame?: string | number,
 		) {
 			const sprite = new Packy(this.scene, x, y, texture, frame);
-			// sprite.setScale(0.1);
+			sprite.setScale(1);
 
 			this.displayList.add(sprite);
 			this.updateList.add(sprite);
 
 			this.scene.physics.world.enableBody(sprite, Phaser.Physics.Arcade.DYNAMIC_BODY);
-			sprite.body?.setSize(sprite.width * 0.1, sprite.height * 0.1);
+			// sprite.body?.setSize(sprite.width * 0.1, sprite.height * 0.1);
 
 			return sprite;
 		},

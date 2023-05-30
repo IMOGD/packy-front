@@ -2,6 +2,7 @@ import { Game } from '@libs/game';
 import Phaser from 'phaser';
 import { getKeyboardManager, KeyboardManager } from '@libs/manager/keyBoardManager';
 import CONSTANT from '../../../constant';
+import TilemapLayer = Phaser.Tilemaps.TilemapLayer;
 
 class mainScene extends Phaser.Scene {
 	private character: Phaser.GameObjects.Rectangle | undefined = undefined;
@@ -30,11 +31,12 @@ class mainScene extends Phaser.Scene {
 		// tileset
 		const tileset = map.addTilesetImage('test-tiled-set', 'test_tile');
 		map.createLayer('ground', tileset as Phaser.Tilemaps.Tileset, 0, 0);
-		const wallLayer = map.createLayer('wall', tileset as Phaser.Tilemaps.Tileset, 0, 0);
+
+		const wallLayer = map.createLayer('wall', tileset as Phaser.Tilemaps.Tileset);
 
 		wallLayer?.setCollisionByProperty({ collision: true });
 
-		const debugGraphics = this.add.graphics().setAlpha(0.3);
+		const debugGraphics = this.add.graphics().setAlpha(0.7);
 		wallLayer?.renderDebug(debugGraphics, {
 			tileColor: null,
 			collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
@@ -42,7 +44,9 @@ class mainScene extends Phaser.Scene {
 		});
 
 		// 캐릭터 생성
-		this.Packy = this.add.Packy(0, 0, 'Packy');
+		this.Packy = this.add.Packy(100, 80, 'Packy');
+
+		this.physics.add.collider(this.Packy, wallLayer as TilemapLayer);
 	}
 
 	update(time: number, delta: number) {

@@ -22,7 +22,7 @@ export class Game extends GameBase {
 			type: Phaser.AUTO,
 			width: 600,
 			height: 600,
-			backgroundColor: '#003bd5',
+			// backgroundColor: '#003bd5',
 			physics: {
 				default: 'arcade',
 				arcade: {

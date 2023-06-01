@@ -5,7 +5,7 @@ import CONSTANT from '../../../constant';
 declare global {
 	namespace Phaser.GameObjects {
 		interface GameObjectFactory {
-			Packy(x: number, y: number, texture: string, frame?: string | number): Packy;
+			Packy(x: number, y: number, texture: string, charType: CHAR_TYPE, target?: Packy | undefined): Packy;
 		}
 	}
 }
@@ -17,17 +17,27 @@ enum HEALTH_STATE {
 	DEAD = 2,
 }
 
+// 캐릭터 타입
+export enum CHAR_TYPE {
+	PACKY,
+	GHOST,
+}
+
 export default class Packy extends Phaser.Physics.Arcade.Sprite {
 	private healthState = HEALTH_STATE.IDLE;
 	private damageTime = 0;
 	private _health = 3;
 	private _coins = 0;
 	private _moveSpeed = 100;
+	private readonly _charType: CHAR_TYPE = CHAR_TYPE.PACKY;
+	private _target: Packy | undefined;
 
 	// private knives?: Phaser.Physics.Arcade.Group; // 난 칼안써.
 
-	constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number) {
-		super(scene, x, y, texture, frame);
+	constructor(scene: Phaser.Scene, x: number, y: number, texture: string, charType: CHAR_TYPE, target?: Packy) {
+		super(scene, x, y, texture);
+		this._charType = charType;
+		if (charType === CHAR_TYPE.GHOST) this._target = target; //ghost라면 타겟이 필요함
 	}
 
 	get health() {
@@ -64,6 +74,31 @@ export default class Packy extends Phaser.Physics.Arcade.Sprite {
 		// TODO heal effect?
 	}
 
+	getCharType() {
+		return this._charType;
+	}
+
+	/**
+	 * 고스트일때 술래잡기
+	 */
+	chatchTarget() {
+		// 나 자신이 고스트일때, 타겟 좌표로 잡기
+		if (this._charType === CHAR_TYPE.GHOST) {
+			if (this._target) {
+				// console.log(Math.round(this._target.x / 24), Math.round(this._target.y / 24));
+				// console.log(Math.round(this.x / 24), Math.round(this.y / 24));
+				if (Math.round(this._target.x / 24) === Math.round(this.x / 24)) {
+					if (Math.round(this._target.y / 24) === Math.round(this.y / 24)) {
+						window.alert('CHATCH!');
+						this.setVelocity(0, 0);
+						this._target.destroy(true);
+						this._target = undefined;
+					}
+				}
+			}
+		}
+	}
+
 	update(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {
 		if (this._health === HEALTH_STATE.DEAD) return;
 		else if (this._health === HEALTH_STATE.DAMAGE) {
@@ -90,6 +125,8 @@ export default class Packy extends Phaser.Physics.Arcade.Sprite {
 		// else {
 		// 	this.setVelocity(0, 0);
 		// }
+		// 술래잡기
+		this.chatchTarget();
 	}
 }
 
@@ -102,9 +139,10 @@ export function initPacky() {
 			x: number,
 			y: number,
 			texture: string,
-			frame?: string | number,
+			charType: CHAR_TYPE,
+			target?: Packy,
 		) {
-			const sprite = new Packy(this.scene, x, y, texture, frame);
+			const sprite = new Packy(this.scene, x, y, texture, charType, target);
 			sprite.setScale(1);
 
 			this.displayList.add(sprite);

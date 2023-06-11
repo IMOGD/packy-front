@@ -1,19 +1,13 @@
 import Phaser from 'phaser';
-import { Store } from 'pinia';
-import { GameBase } from './game-base';
 import * as TWEEN from '@tweenjs/tween.js';
 import gameUtil from '@libs/util/game-util';
 import CONSTANT from '../../constant';
-import Packy, { initPacky } from '@libs/characters/Packy';
+import { initPacky } from '@libs/characters/Packy';
 
-export class Game extends GameBase {
+export class Game {
 	private game?: Phaser.Game | undefined;
 	private contentContainer?: Phaser.GameObjects.Container;
 	private requestAnimationId = -1;
-
-	constructor(contentId: string, store: Store) {
-		super(contentId, store);
-	}
 
 	preload(): void {}
 
@@ -30,7 +24,7 @@ export class Game extends GameBase {
 					debug: true,
 				},
 			},
-			parent: this.getParentContainer(),
+			parent: 'game-container',
 			scene: {
 				preload: this.gamePreload.bind(this),
 				create: this.gameCreate.bind(this),
@@ -39,6 +33,16 @@ export class Game extends GameBase {
 		});
 		this.game.canvas.classList.add('GameContainer');
 		initPacky();
+	}
+
+	resize() {
+		// resize
+	}
+	destroy() {
+		// destroy
+		if (this.contentContainer) {
+			this.contentContainer.removeAll(true);
+		}
 	}
 
 	getScene(): Phaser.Scene {
@@ -75,8 +79,8 @@ export class Game extends GameBase {
 
 let game: Game;
 
-export const createNewGame = (contentId: string, store: any) => {
-	if (!game) game = new Game(contentId, store);
+export const createNewGame = () => {
+	if (!game) game = new Game();
 	return game;
 };
 //

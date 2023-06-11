@@ -10,13 +10,6 @@ declare global {
 	}
 }
 
-// 캐릭터 상태값
-enum HEALTH_STATE {
-	IDLE = 0,
-	DAMAGE = 1,
-	DEAD = 2,
-}
-
 // 캐릭터 타입
 export enum CHAR_TYPE {
 	PACKY,
@@ -24,10 +17,6 @@ export enum CHAR_TYPE {
 }
 
 export default class Packy extends Phaser.Physics.Arcade.Sprite {
-	private healthState = HEALTH_STATE.IDLE;
-	private damageTime = 0;
-	private _health = 3;
-	private _coins = 0;
 	private _moveSpeed = 100;
 	private readonly _charType: CHAR_TYPE = CHAR_TYPE.PACKY;
 	private _target: Packy | undefined;
@@ -40,40 +29,6 @@ export default class Packy extends Phaser.Physics.Arcade.Sprite {
 		if (charType === CHAR_TYPE.GHOST) this._target = target; //ghost라면 타겟이 필요함
 	}
 
-	get health() {
-		return this._health;
-	}
-
-	// damaged
-	hasDamaged() {
-		if (CONSTANT.DEBUG) console.log(`Packy:hasDamaged}`);
-
-		if (this._health <= 0) return;
-		this._health--;
-
-		if (this.health <= 0) {
-			// died
-			this.healthState = HEALTH_STATE.DEAD;
-			this.setVelocity(0, 0);
-		} else if (this._health < 3) {
-			this.healthState = HEALTH_STATE.DAMAGE;
-		}
-	}
-
-	// healed
-	hasHealed(): void {
-		if (CONSTANT.DEBUG) console.log(`Packy:hasHealed}`);
-
-		// 죽었을땐 힐 안됌
-		if (this._health <= 0) return;
-		// max health 값 설정
-		if (this._health > 2) return;
-
-		this._health++;
-
-		// TODO heal effect?
-	}
-
 	getCharType() {
 		return this._charType;
 	}
@@ -81,7 +36,7 @@ export default class Packy extends Phaser.Physics.Arcade.Sprite {
 	/**
 	 * 고스트일때 술래잡기
 	 */
-	chatchTarget() {
+	catchTarget() {
 		// 나 자신이 고스트일때, 타겟 좌표로 잡기
 		if (this._charType === CHAR_TYPE.GHOST) {
 			if (this._target) {
@@ -100,10 +55,6 @@ export default class Packy extends Phaser.Physics.Arcade.Sprite {
 	}
 
 	update(cursors: Phaser.Types.Input.Keyboard.CursorKeys) {
-		if (this._health === HEALTH_STATE.DEAD) return;
-		else if (this._health === HEALTH_STATE.DAMAGE) {
-			// TODO add damaged action?
-		}
 		if (!cursors) return;
 
 		// left
@@ -126,7 +77,7 @@ export default class Packy extends Phaser.Physics.Arcade.Sprite {
 		// 	this.setVelocity(0, 0);
 		// }
 		// 술래잡기
-		this.chatchTarget();
+		this.catchTarget();
 	}
 }
 

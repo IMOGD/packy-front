@@ -1,0 +1,173 @@
+@startuml
+'enum'
+enum CHAR_TYPE {
+    PACKY = 0,
+    GHOST = 1
+}
+
+enum GAME_TYPE {
+    SOLO,
+    DUO,
+    MULTI
+}
+
+enum CHAR_TYPE {
+    PACKY,
+    GHOST,
+    // .. etc
+}
+
+
+
+'package'
+package EVENT_PACKAGE <<Rectangle>> {
+    interface CHAT_MOVE {
+        userIdx : uuid;
+        vector : VECTOR;
+    }
+
+
+    interface CHAT_PLAYER_EVENT {
+        eventType :
+        userIdx : uuid;
+        targetIdx : uuid; // userIdx가 targetIdx를 잡음
+    }
+
+    enum CHAT_EVENT {
+        MOVE, // 움직임
+        END, // 게임종료
+        RESTART, // 재시작
+        PLAYER_EVENT, // 술래와 도둑의 관계 변경 or 이벤트
+    }
+
+    enum VECTOR {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
+
+    enum PLAYER_EVENT_TYPE {
+        CATCH, // 술래가 도둑을 잡음 (도둑 die)
+        EAT_ALL // 도둑이 티켓을 다먹음 (술래 도둑 관계 역전)
+    }
+}
+
+
+'interface'
+
+
+interface mapInterface {
+    key : string;
+    src : string;
+}
+
+interface charInterface {
+    key : string;
+    name : string;
+    src : string;
+}
+
+
+'class'
+class game extends EventTarget {
+    game : Phaser.Game | undefined;
+    contentContainer : Phaser.GameObjects.Container;
+    requestAnimationId : number;
+
+    preload(): void;
+    create(): void;
+    resize(): void;
+    getScene(): Phaser.Scene;
+    gamePreload(): void;
+    gameCreate():void;
+    gameUpdate():void;
+    gameStart():void;
+}
+
+
+class mainScene extends Phaser.Scene {
+    - _character : CHAR_TYPE
+    - _character_2p : CHAR_TYPE
+    - _map : mapInterface
+    - _gameType : GAME_TYPE
+
+    + preload()
+    + create()
+    + update()
+
+    + setMap() // map 설정
+    + getMap() : mapInterface
+    + setCharacter(player : number) // character 설정
+    + getCharacter(player : number) : charInterface
+    + setGameType() // 1p, 2p, multi 설정
+    + getGameType()
+}
+
+class startPage extends mainScene {
+    // start page
+    // it can select 1p, 2p, multiplay
+    - _gameTypeList : GAME_TYPE[]
+
+    +super.setGameType()
+}
+
+class chooseCharacter extends mainScene {
+    // choose Character
+    // packy, ghost ... etc
+    - _characterList : charInterface[]
+
+    + super.setCharacter(player))
+}
+
+class chooseMap extends mainScene {
+    // choose map
+    // it can select maps
+
+    + super.setMap()
+}
+
+class gameScene extends mainScene{
+    - _character = super.getCharacter(player)
+    - _character_2p = super.getCharacter(player)
+    - _map = super.getMap
+    - _gameType = super.getGameType
+
+    + preload() // load Map, load Character
+    + create() // create map, create character, if gameType is MULTI : connect socket
+    + update() // update phaser key input
+}
+
+
+class chatUtil <socket.js> {
+    - _roomIdx : number
+    - _userIdx : uuid
+    - _userNickName : string;
+
+    + connectServer()
+    + emitEvent()
+    + eventListener()
+}
+
+class Packy extends Phaser.Physics.Arcade.Container{
+    - _moveSpeed : number
+    - _target : Phaser.GameObject.Container // 잡아야할 대상
+    - _nickName : string // 로그인한 사용자 닉네임
+
+
+    + update(phaser.input) // setVelocity()
+    - setVelocity() // 이동
+    - catchTarget() // 타겟을 잡았는지 이벤트 트리거
+    + setTarget(target : Phaser.GameObject.Container) : void
+    + getTarget(): Phaser.GameObject.Container
+    + gameOver() : void // 죽었을때
+}
+
+'relation'
+chatUtil .. gameScene
+Packy .. chooseCharacter
+EVENT_PACKAGE .. chatUtil
+
+
+
+@enduml

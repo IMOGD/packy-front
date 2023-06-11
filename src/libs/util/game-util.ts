@@ -1,28 +1,23 @@
-const startScene = async (
-  ctx: Phaser.Scene,
-  sceneKey: string
-): Promise<void> => {
-  if (sceneKey) {
-    const ts = await import(`../../libs/scene/${sceneKey}.ts`);
-    // const sceneParam = Object.assign({}, { isDevelopment: AppConfig.ENV === 'development' }, param);
-    try {
-      if (ctx.scene) {
-        const sceneList = ctx.scene.manager.getScenes();
-        if (sceneList.length > 0) {
-          for (const sceneListKey of sceneList) {
-            if (sceneListKey.scene.key !== "default")
-              ctx.scene.manager.remove(sceneListKey.scene.key);
-          }
-        }
-        ctx.scene.add(sceneKey, new ts.default());
-        ctx.scene.start(sceneKey);
-      }
-    } catch (e) {
-      console.error(e, sceneKey, ts.default);
-    }
-  }
+const startScene = async (ctx: Phaser.Scene, sceneKey: string): Promise<void> => {
+	if (sceneKey) {
+		const ts = await import(`../scene/${sceneKey}.ts`);
+		try {
+			if (ctx.scene) {
+				ctx.scene.add(sceneKey, new ts.default());
+				ctx.scene.start(sceneKey);
+				const sl = ctx.scene.manager.scenes;
+				sl.forEach(v => {
+					if (v.scene.key !== 'default' && v.scene.key !== sceneKey) {
+						ctx.scene.remove(v.scene.key);
+					}
+				});
+			}
+		} catch (e) {
+			console.error(e, sceneKey, ts.default);
+		}
+	}
 };
 
 export default {
-  startScene,
+	startScene,
 };

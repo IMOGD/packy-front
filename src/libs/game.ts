@@ -14,8 +14,8 @@ export class Game {
 	create(): void {
 		this.game = new Phaser.Game({
 			type: Phaser.AUTO,
-			width: 600,
-			height: 600,
+			width: CONSTANT.CANVAS.WIDTH,
+			height: CONSTANT.CANVAS.HEIGHT,
 			// backgroundColor: '#003bd5',
 			physics: {
 				default: 'arcade',
@@ -50,7 +50,13 @@ export class Game {
 		return <Phaser.Scene>this.game.scene.getAt(0);
 	}
 
-	gamePreload(): void {}
+	gamePreload(): void {
+		const scene = this.getScene();
+		console.log('gamePreload');
+		scene.load.audio(CONSTANT.SOUND_LIST.CONFIRM.key, CONSTANT.SOUND_LIST.CONFIRM.src);
+		scene.load.audio(CONSTANT.SOUND_LIST.SELECT.key, CONSTANT.SOUND_LIST.SELECT.src);
+		scene.load.audio(CONSTANT.SOUND_LIST.CANCEL.key, CONSTANT.SOUND_LIST.CANCEL.src);
+	}
 
 	gameCreate(): void {
 		const scene = this.getScene();
@@ -73,7 +79,7 @@ export class Game {
 	async gameStart(): Promise<void> {
 		const scene = this.getScene();
 		if (this.contentContainer) this.contentContainer.removeAll(true);
-		await gameUtil.startScene(scene, CONSTANT.SCENE_LIST.MAIN);
+		await gameUtil.startScene(scene, CONSTANT.SCENE_LIST.START_PAGE);
 	}
 }
 

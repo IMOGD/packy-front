@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import CONSTANT from '../../../constant';
+import { CHAR_TYPE } from '@libs/type';
 
 // packy 모델 전역 선언
 declare global {
@@ -8,12 +8,6 @@ declare global {
 			Packy(x: number, y: number, texture: string, charType: CHAR_TYPE, target?: Packy | undefined): Packy;
 		}
 	}
-}
-
-// 캐릭터 타입
-export enum CHAR_TYPE {
-	PACKY,
-	GHOST,
 }
 
 export default class Packy extends Phaser.Physics.Arcade.Sprite {

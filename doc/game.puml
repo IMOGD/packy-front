@@ -91,9 +91,11 @@ class mainScene extends Phaser.Scene {
     - _character_2p : CHAR_TYPE
     - _map : mapInterface
     - _gameType : GAME_TYPE
+    + w : number // width
+    + h: number // height
 
     + preload()
-    + create()
+    + create() // set width, height to Phaser.Game.Canvas
     + update()
 
     + setMap() // map 설정

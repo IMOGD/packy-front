@@ -1,7 +1,7 @@
 // 캐릭터 타입
 export enum CHAR_TYPE {
-	PACKY,
-	GHOST,
+	PACKY = 'PACKY',
+	GHOST = 'GHOST',
 }
 
 // 맵 interface

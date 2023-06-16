@@ -27,6 +27,17 @@ class mainScene extends Phaser.Scene {
 		this.w = this.game.canvas.width;
 		this.h = this.game.canvas.height;
 	}
+	update(time: number, delta: number): void {
+		// console.log(this._gameType);
+	}
+
+	public setGameType(gameType: GAME_TYPE) {
+		this._gameType = gameType;
+	}
+
+	getGameType(): GAME_TYPE | undefined {
+		return this._gameType;
+	}
 
 	// 소리 재생
 	playSound(key: string): void {
@@ -89,7 +100,6 @@ class mainScene extends Phaser.Scene {
 		}
 		return container;
 	}
-	update(time: number, delta: number): void {}
 }
 
 export default mainScene;

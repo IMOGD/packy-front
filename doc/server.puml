@@ -1,0 +1,30 @@
+@startuml
+
+node middleware
+
+node chatServer
+
+database postgre
+
+database redis
+
+rectangle session_room
+
+person player1
+person player2
+person player3
+person player4
+person player5
+
+session_room -- player1
+session_room -- player2
+session_room -- player3
+session_room -- player4
+session_room -- player5
+
+chatServer -- session_room
+chatServer -left- redis
+middleware -- session_room
+middleware -right- postgre
+
+@enduml

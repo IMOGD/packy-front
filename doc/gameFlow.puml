@@ -1,0 +1,75 @@
+@startuml
+
+[*] --> selectGameType
+
+state initGame<<fork>>
+selectGameType --> initGame : select game type
+initGame --> solo
+initGame --> duo
+initGame --> multi
+multi --> createGame
+multi --> joinGame
+solo --> selectCharacter
+duo --> selectCharacter
+
+createGame --> selectCharacter
+joinGame --> selectCharacter
+selectCharacter --> selectMap
+selectMap --> startGame
+'[*] -> createRoom
+'createRoom --> gameRoom : join
+
+'[*] -> gameRoom : join need password
+
+state startGame {
+    [*] --> chatEventListener
+    [*] --> Event
+        state Event {
+            [*] --> move
+            [*] --> catchTarget
+            [*] --> allTicket
+            move --> [*]
+            catchTarget --> [*]
+            allTicket --> [*]
+        }
+
+    Event --right> chatEventListener
+
+    state chatEventListener {
+        [*] --> startPoint
+
+        startPoint --> moveEvent
+        startPoint --> catchTargetEvent
+        startPoint --> allTicketEvent
+
+        moveEvent --> moveCharacter:void
+        catchTargetEvent --> killCharacter:void
+        allTicketEvent --> reverseCharCatchType:void
+
+        moveCharacter:void #lightblue--> endPoint :end
+        killCharacter:void #lightblue--> endPoint :end
+        reverseCharCatchType:void #lightblue--> endPoint :end
+
+        endPoint -up> startPoint :Listen
+    }
+
+}
+
+'gameRoom -> chooseCharacter
+'chooseCharacter -> chooseMap
+'
+'State1 --> [*] : Aborted
+'State2 --> State3 : Succeeded
+'State2 --> [*] : Aborted
+'state State3 {
+'  state "Accumulate Enough Data\nLong State Name" as long1
+'  long1 : Just a test
+'  [*] --> long1
+'  long1 --> long1 : New Data
+'  long1 --> ProcessData : Enough Data
+'}
+'State3 --> State3 : Failed
+'State3 --> [*] : Succeeded / Save Result
+'State3 --> [*] : Aborted
+
+@enduml

@@ -23,8 +23,8 @@ selectMap --> startGame
 
 state startGame {
     [*] --> chatEventListener
-    [*] --> Event
-        state Event {
+    [*] --> dispatchEvent
+        state dispatchEvent {
             [*] --> move
             [*] --> catchTarget
             [*] --> allTicket
@@ -33,7 +33,7 @@ state startGame {
             allTicket --> [*]
         }
 
-    Event --right> chatEventListener
+    dispatchEvent --right> chatEventListener
 
     state chatEventListener {
         [*] --> startPoint

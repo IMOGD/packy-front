@@ -2,7 +2,7 @@ import mainScene from '@libs/scene/mainScene';
 import CONSTANT from '../../../constant';
 import Phaser from 'phaser';
 import { KeyboardManager } from '@libs/manager/keyBoardManager';
-import { CHAR_TYPE } from '@libs/type';
+import { CHAR_TYPE, CHARACTER } from '@libs/type';
 import TilemapLayer = Phaser.Tilemaps.TilemapLayer;
 import Packy from '@libs/characters/Packy';
 import MainScene from '@libs/scene/mainScene';
@@ -15,6 +15,7 @@ class gamePage extends MainScene {
 	private Packy2: Phaser.GameObjects.Sprite | undefined = undefined;
 	private cursor: any = undefined;
 	private cursorPlayer2: any = undefined;
+	private test: Phaser.GameObjects.Sprite | undefined = undefined;
 	constructor() {
 		const passParam = CONSTANT.SCENE_LIST.GAME_PAGE;
 		super(passParam);
@@ -22,8 +23,14 @@ class gamePage extends MainScene {
 
 	preload(): void {
 		// super.preload();
-		this.load.image('Packy', './assets/images/Packy_1.png');
-		this.load.image('Ghost', './assets/images/Ghost_1.png');
+		// this.load.spritesheet('test', './assets/images/character/ghost_blue.png', {
+		// 	frameWidth: 30,
+		// 	frameHeight: 30,
+		// 	startFrame: 0,
+		// 	endFrame: 2,
+		// });
+		// this.load.image('Packy', './assets/images/Packy_1.png');
+		// this.load.image('Ghost', './assets/images/Ghost_1.png');
 		this.load.image('test_tile', './assets/resource/map/map-tiled-set.png');
 		this.load.tilemapTiledJSON('test_json', './assets/resource/map/map-tiled-set.json');
 		this.cursor = this.input.keyboard?.createCursorKeys();
@@ -49,7 +56,7 @@ class gamePage extends MainScene {
 		});
 
 		// 캐릭터 생성
-		this.Packy = this.add.Packy(this.getSpawnPoint().x, this.getSpawnPoint().y, 'Packy', CHAR_TYPE.PACKY);
+		this.Packy = this.add.Packy(this.getSpawnPoint().x, this.getSpawnPoint().y, CHARACTER.GHOST_ORANGE).play('default');
 
 		// 충돌체 추가
 		this.physics.add.collider(this.Packy, this.wallLayer as TilemapLayer);
@@ -95,8 +102,7 @@ class gamePage extends MainScene {
 		this.Packy2 = this.add.Packy(
 			this.getSpawnPoint().x,
 			this.getSpawnPoint().y,
-			'Ghost',
-			CHAR_TYPE.GHOST,
+			CHARACTER.PACKY_PINK,
 			this.Packy as Packy,
 		);
 		this.physics.add.collider(this.Packy2, this.wallLayer as TilemapLayer);

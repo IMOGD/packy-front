@@ -3,6 +3,7 @@ import * as TWEEN from '@tweenjs/tween.js';
 import gameUtil from '@libs/util/game-util';
 import CONSTANT from '../../constant';
 import { initPacky } from '@libs/characters/Packy';
+import { preLoader } from '@libs/util/pre-loader';
 
 export class Game {
 	private game?: Phaser.Game | undefined;
@@ -52,10 +53,12 @@ export class Game {
 
 	gamePreload(): void {
 		const scene = this.getScene();
-		console.log('gamePreload');
 		scene.load.audio(CONSTANT.SOUND_LIST.CONFIRM.key, CONSTANT.SOUND_LIST.CONFIRM.src);
 		scene.load.audio(CONSTANT.SOUND_LIST.SELECT.key, CONSTANT.SOUND_LIST.SELECT.src);
 		scene.load.audio(CONSTANT.SOUND_LIST.CANCEL.key, CONSTANT.SOUND_LIST.CANCEL.src);
+		preLoader(scene).then(res => {
+			console.log(res);
+		});
 	}
 
 	gameCreate(): void {
@@ -79,7 +82,7 @@ export class Game {
 	async gameStart(): Promise<void> {
 		const scene = this.getScene();
 		if (this.contentContainer) this.contentContainer.removeAll(true);
-		await gameUtil.startScene(scene, CONSTANT.SCENE_LIST.CHOOSE_CHARACTER_PAGE);
+		await gameUtil.startScene(scene, CONSTANT.SCENE_LIST.GAME_PAGE);
 	}
 }
 

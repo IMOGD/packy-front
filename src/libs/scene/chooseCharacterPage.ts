@@ -13,8 +13,6 @@ class chooseCharacterPage extends mainScene {
 
 	preload() {
 		super.preload();
-		this.load.image(CHAR_TYPE.PACKY, './assets/images/Packy.png');
-		this.load.image(CHAR_TYPE.GHOST, './assets/images/Ghost.png');
 	}
 
 	create() {
@@ -24,8 +22,9 @@ class chooseCharacterPage extends mainScene {
 		// 	.text(this.w / 2, this.h / 2, 'chooseCharacterPage', { fontSize: '30px', color: '#ffffff' })
 		// 	.setOrigin(0.5, 0.5);
 
-		this.addCharacterCard('packy', CHAR_TYPE.PACKY, this.w / 2 - 80, this.h / 2);
-		this.addCharacterCard('ghost', CHAR_TYPE.GHOST, this.w / 2 + 80, this.h / 2);
+		// this.addCharacterCard('packy', CHAR_TYPE.PACKY, this.w / 2 - 80, this.h / 2);
+		// this.addCharacterCard('ghost', CHAR_TYPE.GHOST, this.w / 2 + 80, this.h / 2);
+		const charCon = this.makeRoundGraphic(this.w / 2, this.h / 2, 150, 180, 0xffffff, 1, 20);
 	}
 
 	// 캐릭터 카드 생성

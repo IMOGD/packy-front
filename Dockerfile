@@ -2,7 +2,7 @@ FROM node:18 as builder
 
 COPY . /app
 
-RUN npm -i npm pnpm \
+RUN npm -install pnpm \
     && cd /app \
     && pnpm build
 

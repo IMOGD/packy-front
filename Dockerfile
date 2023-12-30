@@ -2,8 +2,9 @@ FROM node:18 as builder
 
 COPY . /app
 
-RUN npm -install pnpm \
-    && cd /app \
+RUN cd /app \
+    && npm install -g pnpm \
+    && pnpm install \
     && pnpm build
 
 FROM nginx:alpine

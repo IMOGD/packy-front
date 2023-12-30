@@ -1,6 +1,6 @@
 FROM node:18 as builder
 
-COPY ./dist /app
+COPY . /app
 
 RUN npm -i npm pnpm \
     && cd /app \

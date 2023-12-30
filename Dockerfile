@@ -8,7 +8,7 @@ RUN npm -i npm pnpm \
 
 FROM nginx:alpine
 
-COPY --from builder:/app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 
 RUN cp /usr/share/zoneinfo/Asia/Seoul /etc/localtime

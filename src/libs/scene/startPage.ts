@@ -26,19 +26,19 @@ class startPage extends mainScene {
 
 	// 버튼 그리기
 	addBtn(): void {
-		const soloText = this.add.text(0, 0, 'SOLO', { fontSize: '30px', color: '#000000' }).setOrigin(0.5, 0.5);
-		const soloCon = this.makeRoundGraphic(this.w / 2, this.h / 2 - 60 - 20, 180, 60, 0xffffff, 1, 20, [soloText]);
-		this.makeClick(soloCon, () => this.setGameType(GAME_TYPE.SOLO));
+		// const soloText = this.add.text(0, 0, 'SOLO', { fontSize: '30px', color: '#000000' }).setOrigin(0.5, 0.5);
+		// const soloCon = this.makeRoundGraphic(this.w / 2, this.h / 2 - 60 - 20, 180, 60, 0xffffff, 1, 20, [soloText]);
+		// this.makeClick(soloCon, () => this.setGameType(GAME_TYPE.SOLO));
 
 		const duoText = this.add.text(0, 0, 'DUO', { fontSize: '30px', color: '#000000' }).setOrigin(0.5, 0.5);
 		const duoCon = this.makeRoundGraphic(this.w / 2, this.h / 2, 180, 60, 0xffffff, 1, 20, [duoText]);
 		this.makeClick(duoCon, () => this.setGameType(GAME_TYPE.DUO));
 
-		const multiText = this.add.text(0, 0, 'MULTI', { fontSize: '30px', color: '#000000' }).setOrigin(0.5, 0.5);
-		const multiCon = this.makeRoundGraphic(this.w / 2, this.h / 2 + 60 + 20, 180, 60, 0xffffff, 1, 20, [multiText]);
-		this.makeClick(multiCon, () => this.setGameType(GAME_TYPE.MULTI));
+		// const multiText = this.add.text(0, 0, 'MULTI', { fontSize: '30px', color: '#000000' }).setOrigin(0.5, 0.5);
+		// const multiCon = this.makeRoundGraphic(this.w / 2, this.h / 2 + 60 + 20, 180, 60, 0xffffff, 1, 20, [multiText]);
+		// this.makeClick(multiCon, () => this.setGameType(GAME_TYPE.MULTI));
 
-		this.container?.add([soloCon, duoCon, multiCon]);
+		this.container?.add(duoCon);
 	}
 
 	handleDestroy(): void {

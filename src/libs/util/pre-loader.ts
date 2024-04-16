@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { CHARACTER } from '@libs/type';
 
-const char_list = [
+const charList = [
 	CHARACTER.PACKY_BLUE,
 	CHARACTER.PACKY_GREEN,
 	CHARACTER.PACKY_PINK,
@@ -21,7 +21,7 @@ const char_list = [
 export const preLoader = (scene: Phaser.Scene) => {
 	const promiseFun = (resolve: any, reject: any): void => {
 		try {
-			char_list.forEach(v => {
+			charList.forEach(v => {
 				scene.load.spritesheet(v, `./assets/images/character/${v}.png`, {
 					frameWidth: 30,
 					frameHeight: 30,

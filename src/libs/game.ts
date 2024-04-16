@@ -82,7 +82,7 @@ export class Game {
 	async gameStart(): Promise<void> {
 		const scene = this.getScene();
 		if (this.contentContainer) this.contentContainer.removeAll(true);
-		await gameUtil.startScene(scene, CONSTANT.SCENE_LIST.GAME_PAGE);
+		await gameUtil.startScene(scene, CONSTANT.SCENE_LIST.CHOOSE_CHARACTER_PAGE);
 	}
 }
 
